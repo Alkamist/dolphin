@@ -65,6 +65,7 @@ void Callback_WiimoteInterruptChannel(int _number, u16 _channelID, const void* _
 void DisplayMessage(const std::string& message, int time_in_ms);
 
 void FrameUpdateOnCPUThread();
+void FrameAdvance();
 
 bool ShouldSkipFrame(int skipped);
 void VideoThrottle();
