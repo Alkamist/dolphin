@@ -361,10 +361,6 @@ static void CpuThread(const std::optional<std::string>& savestate_path, bool del
   if (_CoreParameter.bFastmem)
     EMM::InstallExceptionHandler();  // Let's run under memory watch
 
-#ifdef USE_MEMORYWATCHER
-  MemoryWatcher::Init();
-#endif
-
   if (savestate_path)
   {
     ::State::LoadAs(*savestate_path);
