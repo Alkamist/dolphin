@@ -724,14 +724,6 @@ else()
 endif()
 list(APPEND LIBS ${ICONV_LIBRARIES})
 
-if(NOT ANDROID)
-  find_package(HIDAPI)
-  if(NOT HIDAPI_FOUND)
-    message(STATUS "Using static HIDAPI from Externals")
-    add_subdirectory(Externals/hidapi EXCLUDE_FROM_ALL)
-  endif()
-endif()
-
 if(ENABLE_WX)
   find_package(wxWidgets 3.1.0 COMPONENTS core aui adv)
 
