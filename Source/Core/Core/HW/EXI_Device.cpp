@@ -16,6 +16,7 @@
 #include "Core/HW/EXI_DeviceIPL.h"
 #include "Core/HW/EXI_DeviceMemoryCard.h"
 #include "Core/HW/EXI_DeviceMic.h"
+#include "Core/HW/EXI_DeviceFrameAdvance.h"
 #include "Core/HW/Memmap.h"
 
 // --- interface IEXIDevice ---
@@ -131,6 +132,10 @@ std::unique_ptr<IEXIDevice> EXIDevice_Create(TEXIDevices device_type, const int 
 	case EXIDEVICE_GECKO:
 		result = std::make_unique<CEXIGecko>();
 		break;
+
+  case EXIDEVICE_FRAME_ADVANCE:
+    result = std::make_unique<CEXIFrameAdvance>();
+    break;
 
 	case EXIDEVICE_AGP:
 		result = std::make_unique<CEXIAgp>(channel_num);

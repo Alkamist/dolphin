@@ -91,6 +91,7 @@ set(SRCS	ActionReplay.cpp
 			HW/EXI_DeviceAGP.cpp
 			HW/EXI_DeviceAMBaseboard.cpp
 			HW/EXI_DeviceEthernet.cpp
+			HW/EXI_DeviceFrameAdvance.cpp
 			HW/EXI_DeviceGecko.cpp
 			HW/EXI_DeviceIPL.cpp
 			HW/EXI_DeviceMemoryCard.cpp
