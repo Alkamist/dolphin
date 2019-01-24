@@ -4,10 +4,8 @@
 
 #pragma once
 
-#include "Core/HW/EXI/EXI_Device.h"
+#include "Core/HW/EXI_Device.h"
 
-namespace ExpansionInterface
-{
 // FrameAdvance device emulation for Melee
 class CEXIFrameAdvance final : public IEXIDevice
 {
@@ -20,5 +18,3 @@ public:
 
   bool IsPresent() const override;
 };
-}
-

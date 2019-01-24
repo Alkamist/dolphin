@@ -2,12 +2,9 @@
 // Licensed under GPLv2+
 // Refer to the license.txt file included.
 
-#include "Core/HW/EXI/EXI_DeviceFrameAdvance.h"
+#include "Core/HW/EXI_DeviceFrameAdvance.h"
 
-#include<stdio>
-
-namespace ExpansionInterface
-{
+#include<iostream>
 
 CEXIFrameAdvance::CEXIFrameAdvance() {}
 CEXIFrameAdvance::~CEXIFrameAdvance() {}
@@ -20,6 +17,4 @@ void CEXIFrameAdvance::DMARead(u32 address, u32 size) {
   std::cout << "DMARead(" << address << ", " << size << ")\n";
 }
 
-bool CEXIFrameAdvance::IsPresent() {return true;}
-
-}
+bool CEXIFrameAdvance::IsPresent() const {return true;}
