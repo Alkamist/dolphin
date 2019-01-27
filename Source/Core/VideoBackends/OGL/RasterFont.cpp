@@ -15,6 +15,11 @@
 namespace OGL
 {
 
+// newer compilers might define CHAR_WIDTH
+#ifdef CHAR_WIDTH
+#undef CHAR_WIDTH
+#endif
+
 static const int CHAR_WIDTH = 8;
 static const int CHAR_HEIGHT = 13;
 static const int CHAR_OFFSET = 32;
