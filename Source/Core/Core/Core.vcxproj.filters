@@ -846,6 +846,9 @@
       <Filter>IOS\USB\Bluetooth</Filter>
     </ClCompile>
     <ClCompile Include="MemoryWatcher.cpp" />
+    <ClCompile Include="HW\EXI\EXI_DeviceFrameAdvance.cpp">
+      <Filter>HW %28Flipper/Hollywood%29\EXI - Expansion Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BootManager.h" />
@@ -1460,6 +1463,9 @@
       <Filter>IOS</Filter>
     </ClInclude>
     <ClInclude Include="MemoryWatcher.h" />
+    <ClInclude Include="HW\EXI\EXI_DeviceFrameAdvance.h">
+      <Filter>HW %28Flipper/Hollywood%29\EXI - Expansion Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

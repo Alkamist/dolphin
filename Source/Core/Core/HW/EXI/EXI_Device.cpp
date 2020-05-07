@@ -15,6 +15,7 @@
 #include "Core/HW/EXI/EXI_DeviceIPL.h"
 #include "Core/HW/EXI/EXI_DeviceMemoryCard.h"
 #include "Core/HW/EXI/EXI_DeviceMic.h"
+#include "Core/HW/EXI/EXI_DeviceFrameAdvance.h"
 #include "Core/HW/Memmap.h"
 
 void IEXIDevice::ImmWrite(u32 data, u32 size)
@@ -139,6 +140,10 @@ std::unique_ptr<IEXIDevice> EXIDevice_Create(const TEXIDevices device_type, cons
 
   case EXIDEVICE_AGP:
     result = std::make_unique<CEXIAgp>(channel_num);
+    break;
+
+  case EXIDEVICE_FRAME_ADVANCE:
+    result = std::make_unique<CEXIFrameAdvance>();
     break;
 
   case EXIDEVICE_AM_BASEBOARD:
