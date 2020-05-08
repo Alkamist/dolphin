@@ -37,13 +37,13 @@ private:
   u32 ChasePointer(const std::string& line);
   std::string ComposeMessages();
 
-  bool m_running;
+  bool m_running = false;
 
 #ifndef USE_ZMQ
   int m_fd;
   sockaddr_un m_addr;
 #else
-	void* m_context;
+  void* m_context;
   void* m_socket;
 #endif
 

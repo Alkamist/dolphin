@@ -89,13 +89,18 @@ bool MemoryWatcher::OpenSocket(const std::string& path)
     return false;
   }
 
-  if(!(m_socket = zmq_socket(m_context, ZMQ_PUSH)))
+  if (!(m_socket = zmq_socket(m_context, ZMQ_PUSH)))
   {
     std::cout << "Failed to create zmq socket: " << ZMQErrorString() << std::endl;
     return false;
   }
-  
-  std::string address = "tcp://localhost:5555";
+
+  std::ifstream in(path);
+  int port;
+  in >> port;
+
+  //std::string address = "tcp://localhost:5555";
+  std::string address = "tcp://localhost:" + std::to_string(port);
   if (zmq_connect(m_socket, address.c_str()) < 0)
   {
     std::cout << "Error connecting socket: " << ZMQErrorString() << std::endl;
