@@ -83,13 +83,21 @@ bool MemoryWatcher::OpenSocket(const std::string& path)
   m_fd = socket(AF_UNIX, SOCK_DGRAM, 0);
   return m_fd >= 0;
 #else
+  std::cout << "Connecting zmq socket to " << path << std::endl;
+
+  if (!File::Exists(path))
+  {
+    std::cout << "Socket does not exist!" << std::endl;
+    return false;
+  }
+
   if (!(m_context = zmq_ctx_new()))
   {
     std::cout << "Failed to allocate zmq context: " << ZMQErrorString() << std::endl;
     return false;
   }
 
-  if (!(m_socket = zmq_socket(m_context, ZMQ_PUSH)))
+  if (!(m_socket = zmq_socket(m_context, ZMQ_REQ)))
   {
     std::cout << "Failed to create zmq socket: " << ZMQErrorString() << std::endl;
     return false;
@@ -99,15 +107,14 @@ bool MemoryWatcher::OpenSocket(const std::string& path)
   int port;
   in >> port;
 
-  //std::string address = "tcp://localhost:5555";
   std::string address = "tcp://localhost:" + std::to_string(port);
   if (zmq_connect(m_socket, address.c_str()) < 0)
   {
     std::cout << "Error connecting socket: " << ZMQErrorString() << std::endl;
     return false;
   }
-  
-  std::cout << "Connected MemoryWatcher to " << address << std::endl;
+
+  std::cout << "Connected zmq socket to " << path << std::endl;
   return true;
 #endif
 }
@@ -123,6 +130,8 @@ u32 MemoryWatcher::ChasePointer(const std::string& line)
 std::string MemoryWatcher::ComposeMessages()
 {
   std::stringstream message_stream;
+  // prevent silly things like commas being added!
+  message_stream.imbue(std::locale::classic());
   message_stream << std::hex;
 
   for (auto& entry : m_values)
@@ -152,5 +161,9 @@ void MemoryWatcher::Step()
   sendto(m_fd, message.c_str(), message.size() + 1, 0, reinterpret_cast<sockaddr*>(&m_addr), sizeof(m_addr));
 #else
   zmq_send(m_socket, message.c_str(), message.size(), 0);
+
+  // do something with the reply?
+  char buffer[10];
+  zmq_recv(m_socket, buffer, 10, 0);
 #endif
 }
